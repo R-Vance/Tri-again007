@@ -75,28 +75,28 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 @media(prefers-color-scheme:dark){.yn-btn.yes.active{background:#0f2a1e;border-color:#2d7a4f;color:#4fcf8e;}}
 .pension-fields{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
 
-/* ── Contribution table — mobile-first, no horizontal scroll ── */
+/* ── Contribution table — no horizontal scroll, readable inputs ── */
 .decade-wrap{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);overflow:hidden;}
 .decade-scroll{max-height:480px;overflow-y:auto;overflow-x:hidden;}
-.age-table{width:100%;border-collapse:collapse;font-size:0.78rem;table-layout:fixed;}
-.age-table thead th{font-size:0.62rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.03em;padding:8px 6px;border-bottom:2px solid var(--border);text-align:left;background:var(--surface);position:sticky;top:0;z-index:2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.age-table{width:100%;border-collapse:collapse;font-size:0.78rem;}
+.age-table thead th{font-size:0.6rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.03em;padding:7px 6px;border-bottom:2px solid var(--border);text-align:left;background:var(--surface);position:sticky;top:0;z-index:2;line-height:1.3;}
 .age-table thead th.r{text-align:right;}
 .age-table thead th.c{text-align:center;}
-.age-table td{padding:4px 6px;vertical-align:middle;}
-/* Column widths via nth-child — age, pre-tax, after-tax, total, reset */
-.age-table th:nth-child(1),.age-table td:nth-child(1){width:22%;}
-.age-table th:nth-child(2),.age-table td:nth-child(2){width:27%;}
-.age-table th:nth-child(3),.age-table td:nth-child(3){width:27%;}
-.age-table th:nth-child(4),.age-table td:nth-child(4){width:16%;text-align:right;}
-.age-table th:nth-child(5),.age-table td:nth-child(5){width:8%;text-align:center;}
-.contrib-input{width:100%;padding:4px 5px;border-radius:6px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);font-size:0.76rem;font-family:inherit;text-align:right;-moz-appearance:textfield;appearance:textfield;transition:border-color 0.15s,background 0.15s,color 0.15s;}
+.age-table td{padding:4px 4px;vertical-align:middle;}
+/* Fixed pixel widths so nothing overflows on any screen */
+.age-table th:nth-child(1),.age-table td:nth-child(1){width:56px;min-width:56px;max-width:56px;}
+.age-table th:nth-child(2),.age-table td:nth-child(2){width:calc(43% - 28px);}
+.age-table th:nth-child(3),.age-table td:nth-child(3){width:calc(43% - 28px);}
+.age-table th:nth-child(4),.age-table td:nth-child(4){width:14%;text-align:right;white-space:nowrap;}
+.age-table th:nth-child(5),.age-table td:nth-child(5){width:30px;min-width:30px;max-width:30px;text-align:center;}
+.contrib-input{width:100%;min-width:0;padding:5px 4px;border-radius:6px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);font-size:0.8rem;font-family:inherit;text-align:right;-moz-appearance:textfield;appearance:textfield;transition:border-color 0.15s,background 0.15s,color 0.15s;}
 .contrib-input::-webkit-outer-spin-button,.contrib-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
 .contrib-input:focus{outline:none;border-color:var(--accent);}
 .contrib-input.pinned-roth{border-color:var(--roth);color:var(--roth);font-weight:600;background:var(--surface2);}
 .contrib-input.pinned-trad{border-color:var(--trad);color:var(--trad);font-weight:600;background:var(--surface2);}
-.age-lbl{font-weight:600;font-size:0.75rem;white-space:nowrap;padding-left:2px;}
-.total-cell{font-size:0.7rem;color:var(--muted);text-align:right;white-space:nowrap;}
-.reset-btn{background:none;border:1px solid transparent;cursor:pointer;color:var(--muted);font-size:0.9rem;line-height:1;padding:2px 4px;border-radius:5px;opacity:0;pointer-events:none;transition:opacity 0.15s;}
+.age-lbl{font-weight:600;font-size:0.75rem;white-space:nowrap;}
+.total-cell{font-size:0.68rem;color:var(--muted);text-align:right;white-space:nowrap;}
+.reset-btn{background:none;border:1px solid transparent;cursor:pointer;color:var(--muted);font-size:0.9rem;line-height:1;padding:2px 3px;border-radius:5px;opacity:0;pointer-events:none;transition:opacity 0.15s;}
 .year-row:hover .reset-btn.has-pin{opacity:0.6;pointer-events:auto;}
 .reset-btn.has-pin{opacity:0.3;pointer-events:auto;}
 .reset-btn.has-pin:hover{opacity:1;color:var(--trad);background:var(--surface2);}
@@ -280,12 +280,12 @@ footer{text-align:center;color:var(--muted);font-size:0.65rem;margin-top:40px;pa
       <input type="range" id="sl-cur-age" min="18" max="65" step="1" value="33">
     </div>
     <div class="sl-row">
-      <div class="sl-header"><span class="sl-label">After-tax balance<small>Roth 457b · Roth IRA · Roth 403b</small></span><span class="sl-val" id="lbl-start-r">$7,000</span></div>
-      <input type="range" id="sl-start-r" min="0" max="500000" step="1000" value="7000">
-    </div>
-    <div class="sl-row">
       <div class="sl-header"><span class="sl-label">Pre-tax balance<small>457b · 403b · 401k · TSP · IRA</small></span><span class="sl-val" id="lbl-start-t">$13,000</span></div>
       <input type="range" id="sl-start-t" min="0" max="500000" step="1000" value="13000">
+    </div>
+    <div class="sl-row">
+      <div class="sl-header"><span class="sl-label">After-tax balance<small>Roth 457b · Roth IRA · Roth 403b</small></span><span class="sl-val" id="lbl-start-r">$7,000</span></div>
+      <input type="range" id="sl-start-r" min="0" max="500000" step="1000" value="7000">
     </div>
     <div class="sl-row">
       <div class="sl-header"><span class="sl-label">Expected final salary<small>today's dollars</small></span><span class="sl-val" id="lbl-salary">$110,000</span></div>
@@ -358,8 +358,8 @@ footer{text-align:center;color:var(--muted);font-size:0.65rem;margin-top:40px;pa
         <thead>
           <tr>
             <th>Age</th>
-            <th>Pre-Tax $/mo</th>
-            <th>After-Tax $/mo</th>
+            <th>Pre-Tax<br><span style="font-weight:400;opacity:0.7">$/mo</span></th>
+            <th>After-Tax<br><span style="font-weight:400;opacity:0.7">$/mo</span></th>
             <th class="r">Total</th>
             <th class="c">↺</th>
           </tr>
